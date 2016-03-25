@@ -10,7 +10,7 @@ validates :content, :user_id, :question_id, presence: true
 
 
   def score
-    self.votes.pluck(:value).reduce(:+)
+    self.votes.pluck(:value).reduce(:+) || 0
   end
 
 
