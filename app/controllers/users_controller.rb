@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
 
+  def index
+    @users = User.all
+  end
+
   def new
     @user = User.new
   end
@@ -21,12 +25,25 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find_by(id: params[:id])
+    unless @user == current_user
+      flash.alert = "Nope."
+      redirect_to login_path
+    end
   end
 
   def update
+    @user = User.find_by(id: params[:id])
+    unless @user == current_user
+      flash.alert = "Try again."
+      redirect_to login_path
+    end
+    @user.update(user_params)
+    redirect_to @user
   end
 
   def destroy
+
   end
 
   private

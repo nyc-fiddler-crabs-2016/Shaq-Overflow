@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'questions#index'
+  resources :users
   resources :questions, only: [:create, :destroy, :edit, :update, :show, :index] do
     resources :answers, only: [:create, :destroy, :edit, :update]
   end
@@ -7,7 +8,6 @@ Rails.application.routes.draw do
   resources :votes, only: [:create, :destroy, :edit, :update]
   resources :tags, only: [:create, :destroy, :index, :show]
 
-  resources :users, except: [:index, :edit]
   get '/login' => 'session#new'
   resources :session, only: [:create, :destroy]
 
