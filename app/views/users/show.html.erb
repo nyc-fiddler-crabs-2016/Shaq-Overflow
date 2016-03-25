@@ -1,0 +1,12 @@
+<h2><%= @user.username %></h2>
+<div>
+  <h3><%=@user.username%>'s Questions:</h3>
+  <ol>
+  <% @user.questions.each do |question| %>
+    <li>
+      <h3><%= link_to question.title, question %></h3>
+      <%= question.content %>
+    </li>
+  <% end %>
+  </ol>
+</div>
