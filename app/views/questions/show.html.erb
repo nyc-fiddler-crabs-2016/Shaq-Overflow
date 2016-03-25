@@ -1,0 +1,9 @@
+this is the show page
+
+<h3><%= @question.title %></h3>
+<h5><%= @question.content %></h5>
+<p><%= @question.score %></p>
+
+
+<%# if current_user.owns? %>
+<%= button_to "Delete This Question", {action:"destroy",id: @question.id}, method: :delete, data: {confirm: "Are you sure you want to delete this? It might be helpful for other people later."} %>

@@ -7,17 +7,18 @@ class Question < ActiveRecord::Base
 
 
   def score
-    self.votes.pluck(:value).reduce(:+)
+    self.votes.pluck(:value).reduce(:+) || 0
   end
 
-  def top_vote_day
+  # def top_vote_day
+  #   Question.all.where(((Time.now - Question.first.created_at) / 3600) == 24) order
+  # end
 
-  end
+  # def top_vote_week
 
-  def top_vote_week
-  end
+  # end
 
-  def top_vote_month
-  end
+  # def top_vote_month
+  # end
 
 end
