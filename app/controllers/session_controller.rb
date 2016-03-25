@@ -1,4 +1,6 @@
 class SessionController < ApplicationController
+
+  before_action :ensure_current_user, except: [:new, :create, :destroy]
   def new
     render '_new'
   end
@@ -16,7 +18,7 @@ class SessionController < ApplicationController
 
   def destroy
     session.clear
-    redirect_to :back
+    redirect_to "/"
   end
 
 end

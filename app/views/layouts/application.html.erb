@@ -13,8 +13,8 @@
       <ul>
         <li><%= link_to 'home', root_path%></li>
         <% if current_user %>
-        <li><%= link_to 'logout' %></li>
-        <li><%= link_to 'profile', current_user %></li>
+        <li><%= link_to 'logout', session_path(current_user.id), method: :delete %></li>
+        <li><%= link_to "#{current_user.username}", current_user %></li>
         <% else %>
         <li><%= render 'session/new' %></li>
         <li><%= link_to 'sign up', new_user_path %></li>
