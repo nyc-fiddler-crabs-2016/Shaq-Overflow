@@ -1,11 +1,17 @@
 Rails.application.routes.draw do
-  root 'question#index'
-  resources :user, except: [:index, :edit]
-  resources :question, only: [:create, :delete, :edit, :show, :index]
-  resources :answer, only: [:create, :delete, :edit]
-  resources :comment, only: [:create, :delete, :edit]
-  resources :vote, only: [:create, :delete, :edit]
-  resources :tag, only: [:create, :delete, :index, :show]
+  root 'questions#index'
+  resources :users
+  resources :questions, only: [:create, :destroy, :edit, :update, :show, :index] do
+    resources :answers, only: [:create, :destroy, :edit, :update]
+  end
+  resources :comments, only: [:create, :destroy, :edit, :update]
+  resources :votes, only: [:create, :destroy, :edit, :update]
+  resources :tags, only: [:create, :destroy, :index, :show]
+
+  get '/login' => 'session#new'
+  resources :session, only: [:create, :destroy]
+
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.
