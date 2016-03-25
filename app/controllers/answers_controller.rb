@@ -1,4 +1,4 @@
-class AnswersController < ActionController::Base
+class AnswersController < ApplicationController
 
   def new
     @question = Question.find(params[:id])
@@ -8,7 +8,7 @@ class AnswersController < ActionController::Base
   def create
     @question = Question.find(params[:question_id])
     @answer = @question.answers.build(answer_params)
-    @answer.user_id = 1
+    @answer.user_id = current_user.id
     if @answer.save
       redirect_to "/questions/#{@answer.question.id}"
     else
@@ -36,7 +36,7 @@ end
   def destroy
     @answer = Answer.find(params[:id]).destroy
     flash[:success] = "Answer Deleted"
-    redirect_to root_path
+    redirect_to :back
   end
 
   private

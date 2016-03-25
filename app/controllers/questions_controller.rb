@@ -1,4 +1,4 @@
-class QuestionsController < ActionController::Base
+class QuestionsController < ApplicationController
 
   def index
     @questions = Question.last(10)
@@ -24,7 +24,7 @@ class QuestionsController < ActionController::Base
 
   def create
     @question = Question.new(question_params)
-    @question.user_id = 1
+    @question.user_id = current_user.id
       if @question.save
         redirect_to "/questions/#{@question.id}"
       else
