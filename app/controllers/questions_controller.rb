@@ -20,6 +20,7 @@ class QuestionsController < ApplicationController
     @answers = @question.answers
     @score = @question.score
     @question_comments = @question.comments
+    @vote = Vote.new
   end
 
   def create

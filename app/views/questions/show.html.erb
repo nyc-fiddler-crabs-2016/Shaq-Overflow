@@ -3,6 +3,20 @@ this is the show page
 <h3><%= @question.title %></h3>
 <h5><%= @question.content %></h5>
 <p><%= @question.score %></p>
+<% if current_user.hasnt_voted?("Question", @question.id) %>
+<%= form_for [@question,@vote] do |f|%>
+<%= f.hidden_field :value %>
+<%= hidden_field_tag 'value', 1 %>
+<%= hidden_field_tag 'vote_type', "question" %>
+<%= f.submit "upvote" %>
+<%end %>
+<%= form_for [@question,@vote] do |f|%>
+<%= f.hidden_field :value %>
+<%= hidden_field_tag 'value', -1 %>
+<%= hidden_field_tag 'vote_type', "question" %>
+<%= f.submit "downvote" %>
+<%end %>
+<% end %>
 
 
 <%# if current_user.owns? %>

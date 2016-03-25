@@ -23,4 +23,8 @@ class User < ActiveRecord::Base
     end
   end
 
+  def hasnt_voted?(type, id)
+    self.votes.where(votable_type: type, votable_id: id).empty?
+  end
+
 end

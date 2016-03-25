@@ -1,13 +1,21 @@
-class UsersController < ApplicationController
+class VotesController < ApplicationController
 
   def create
-    @user = User.create(user_params)
-    if @user.save
-      session[:user_id] = @user.id
-      redirect_to root_path
+    case params[:vote_type]
+      when "answer"
+        @vote_target = Answer.find(params[:answer_id])
+      when "comment"
+        @vote_target = Comment.find(params[:comment_id])
+      when "question"
+        @vote_target = Question.find(params[:question_id])
+      end
+    @vote = @vote_target.votes.build(value: params[:value])
+    @vote.user_id = current_user.id
+    if @vote.save
+      redirect_to :back
     else
       flash.alert = "Woops."
-      redirect_to new_user_path
+      redirect_to :back
     end
 
   end
