@@ -2,7 +2,10 @@ Rails.application.routes.draw do
   root 'questions#index'
   resources :users
   resources :questions do
-    resources :answers, only: [:create, :destroy, :edit, :update]
+    resources :answers, only: [:create, :destroy, :edit, :update] do
+      resources :comments, only: [:create, :destroy]
+    end
+    resources :comments, only: [:create, :destroy]
   end
   resources :comments, only: [:create, :destroy, :edit, :update]
   resources :votes, only: [:create, :destroy, :edit, :update]
