@@ -1,0 +1,7 @@
+Edit your answer, make it hateful so all those people who upvoted it look like dicks
+
+<%= form_for [@question,@answer] do |f|%>
+<%= f.label :content %>
+<%= f.text_area :content, value: @answer.content %>
+<%= f.submit 'submit' %>
+<% end %>
