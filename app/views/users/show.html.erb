@@ -1,0 +1,21 @@
+<h2><%= @user.username %></h2>
+<div>
+  <% if @user == current_user %>
+    <%= link_to 'edit profile', edit_user_path %>
+  <% end %>
+</div>
+<div>
+  <h3><%=@user.username%>'s Questions</h3>
+  <% if !@user.questions.empty? %>
+    <ol>
+      <% @user.questions.each do |question| %>
+        <li>
+          <h3><%= link_to question.title, question %></h3>
+          <%= question.content %>
+        </li>
+      <% end %>
+    </ol>
+  <% else %>
+    <div><%= @user.username%> hasn't submitted any questions.</div>
+  <% end %>
+</div>

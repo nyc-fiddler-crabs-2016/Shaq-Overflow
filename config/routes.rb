@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
   root 'questions#index'
-  resources :users, except: [:index, :edit]
-  resources :questions do
+  resources :users
+  resources :questions, only: [:create, :destroy, :edit, :update, :show, :index] do
     resources :answers, only: [:create, :destroy, :edit, :update]
   end
-  resources :comments, only: [:create, :delete, :edit]
-  resources :votes, only: [:create, :delete, :edit]
-  resources :tags, only: [:create, :delete, :index, :show]
+  resources :comments, only: [:create, :destroy, :edit, :update]
+  resources :votes, only: [:create, :destroy, :edit, :update]
+  resources :tags, only: [:create, :destroy, :index, :show]
 
+  get '/login' => 'session#new'
+  resources :session, only: [:create, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
