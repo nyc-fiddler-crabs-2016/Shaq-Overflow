@@ -6,4 +6,17 @@ this is the show page
 
 
 <%# if current_user.owns? %>
+
+
+
+
+<%= render @answers %>
+
+
+<%= form_for [@question, @answer] do |f| %>
+<%= f.label :content %>
+<%= f.text_area :content %>
+<%= f.submit "Submit!" %>
+<% end %>
+
 <%= button_to "Delete This Question", {action:"destroy",id: @question.id}, method: :delete, data: {confirm: "Are you sure you want to delete this? It might be helpful for other people later."} %>

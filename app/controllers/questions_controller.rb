@@ -16,6 +16,7 @@ class QuestionsController < ActionController::Base
 
   def show
     @question = Question.find(params[:id])
+    @answer = Answer.new
     @answers = @question.answers
     @score = @question.score
     @question_comments = @question.comments

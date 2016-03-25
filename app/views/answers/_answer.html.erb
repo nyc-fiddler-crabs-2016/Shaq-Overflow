@@ -1,0 +1,11 @@
+
+<%= answer.content %>
+<%= answer.user.username %>
+<%= answer.score %>
+<ul>
+<% answer.comments.each do |comment| %>
+<li><%= comment.content %></li>
+<li><%= comment.user.username %></li>
+<% end %>
+</ul>
+<%= button_to "Delete This Answer", question_answer_path(@question.id, answer.id), method: :delete, confirm: "shaqfu" %>

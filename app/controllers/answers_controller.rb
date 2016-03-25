@@ -6,18 +6,20 @@ class AnswersController < ActionController::Base
   end
 
   def create
-    @question = Question.find(params[:id])
-    @answer = @question.answers.build(params[:answer])
-    @answer.user_id = session[:user_id]
+    @question = Question.find(params[:question_id])
+    @answer = @question.answers.build(answer_params)
+    @answer.user_id = 1
     if @answer.save
       redirect_to "/questions/#{@answer.question.id}"
     else
       flash[:alert] = @answer.errors.full_messages
       render 'new'
   end
+end
 
   def edit
     @answer = Answer.find(params[:id])
+    @question = Question.find(params[:question_id])
 
   end
 
@@ -28,11 +30,12 @@ class AnswersController < ActionController::Base
     else
       flash[:alert] = @answer.errors.full_messages
       render 'edit'
+    end
   end
 
   def destroy
     @answer = Answer.find(params[:id]).destroy
-    flash[:success] = "User Deleted"
+    flash[:success] = "Answer Deleted"
     redirect_to root_path
   end
 

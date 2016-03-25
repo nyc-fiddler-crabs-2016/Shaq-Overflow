@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'questions#index'
   resources :users, except: [:index, :edit]
   resources :questions do
-    resources :answers, only: [:create, :delete, :edit]
+    resources :answers, only: [:create, :destroy, :edit, :update]
   end
   resources :comments, only: [:create, :delete, :edit]
   resources :votes, only: [:create, :delete, :edit]

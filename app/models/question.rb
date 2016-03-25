@@ -1,9 +1,11 @@
 class Question < ActiveRecord::Base
-  has_many :votes, as: :votable
-  has_many :comments, as: :commentable
-  has_many :answers
+  has_many :votes, as: :votable, dependent: :destroy
+  has_many :comments, as: :commentable, dependent: :destroy
+  has_many :answers, dependent: :destroy
   belongs_to :user
   has_and_belongs_to_many :tags
+
+  validates :title, :content, :user_id,  presence: true
 
 
   def score

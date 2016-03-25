@@ -1,6 +1,6 @@
 class Comment < ActiveRecord::Base
 
-has_many :votes, as: :votable
+has_many :votes, as: :votable , dependent: :destroy
 belongs_to :commentable, polymorphic: true
 belongs_to :user
 
