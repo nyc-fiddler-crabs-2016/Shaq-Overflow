@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
-  root 'question#index'
-  resources :user, except: [:index, :edit]
-  resources :question, only: [:create, :delete, :edit, :show, :index]
-  resources :answer, only: [:create, :delete, :edit]
-  resources :comment, only: [:create, :delete, :edit]
-  resources :vote, only: [:create, :delete, :edit]
-  resources :tag, only: [:create, :delete, :index, :show]
+  root 'questions#index'
+  resources :users, except: [:index, :edit]
+  resources :questions, only: [:create, :delete, :edit, :update, :show, :index] do
+    resources :answers, only: [:create, :delete, :edit]
+  end
+  resources :comments, only: [:create, :delete, :edit]
+  resources :votes, only: [:create, :delete, :edit]
+  resources :tags, only: [:create, :delete, :index, :show]
 
 
   # The priority is based upon order of creation: first created -> highest priority.

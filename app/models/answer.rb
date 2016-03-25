@@ -6,4 +6,10 @@ has_many :votes, as: :votable
 belongs_to :user
 belongs_to :question
 
+
+  def score
+    self.votes.pluck(:value).reduce(:+)
+  end
+
+
 end
