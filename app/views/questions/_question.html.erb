@@ -5,9 +5,3 @@
 <%= question.content %>
 </div>
 
-<%= form_for [question,@comment] do |f|%>
-<%= f.hidden_field :comment_type, "Question" %>
-<%= f.label :content %>
-<%= f.text_area :content %>
-<%= f.submit 'submit' %>
-<% end %>
