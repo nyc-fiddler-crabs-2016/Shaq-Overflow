@@ -1,7 +1,10 @@
-
-<%= answer.content %>
-<%= answer.user.username %>
+<div>
+<%= answer.content %><br>
+--<%= answer.user.username %>
 <%= answer.score %>
+
+</div>
+
 <% if current_user.hasnt_voted?("Answer", answer.id) %>
 <%= form_for [@question,answer,@vote] do |f|%>
 <%= f.hidden_field :value %>
@@ -16,11 +19,20 @@
 <%= f.submit "downvote" %>
 <%end %>
 <% end %>
+
 <ul>
 <% answer.comments.each do |comment| %>
 <li><%= comment.content %></li>
 <li><%= comment.user.username %></li>
 <% end %>
 </ul>
+
+
+<%= form_for [@question, answer, @comment] do |f|%>
+<%= hidden_field_tag :comment_type, 'Answer'  %>
+<%= f.label :comment %>
+<%= f.text_area :content %>
+<%= f.submit 'submit' %>
+<% end %>
 
 <%= button_to "Delete This Answer", question_answer_path(@question.id, answer.id), method: :delete, confirm: "shaqfu" %>
