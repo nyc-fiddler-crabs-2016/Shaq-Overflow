@@ -12,15 +12,18 @@ class Question < ActiveRecord::Base
     self.votes.pluck(:value).reduce(:+) || 0
   end
 
-  # def top_vote_day
-  #   Question.all.where(((Time.now - Question.first.created_at) / 3600) == 24) order
-  # end
 
-  # def top_vote_week
+  def top_vote_day
+    Question.all.where(["created_at >= ?", 1.days.ago])
 
-  # end
+  end
+
+  def top_vote_week
+      Question.all.where(["created_at >= ?", 7.days.ago])
+  end
 
   # def top_vote_month
+
   # end
 
 end
