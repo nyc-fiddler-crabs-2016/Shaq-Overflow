@@ -6,7 +6,7 @@ belongs_to :user
 
 
   def score
-    self.votes.pluck(:value).reduce(:+)
+    self.votes.pluck(:value).reduce(:+) || 0
   end
 
 
