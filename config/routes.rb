@@ -8,7 +8,6 @@ Rails.application.routes.draw do
     end
     resources :comments, only: [:create, :destroy]
     resources :votes, only: [:create,:update]
-    end
   end
   # resources :comments, only: [:create, :destroy, :edit, :update] do
   #   resources :votes, only: [:create,:update]
