@@ -1,15 +1,18 @@
-this is the show page
-
+<div id="question-show">
 <h3><%= @question.title %></h3>
-<h5><%= @question.content %></h5>
-<p><%= @question.score %></p>
+
+<article>
+<p><%= @question.content %></p>
+
+<div id="score">
+<div id="question-voting">
 <% if current_user.hasnt_voted?("Question", @question.id) %>
 <%= form_for [@question,@vote] do |f|%>
 <%= f.hidden_field :value %>
 <%= hidden_field_tag 'value', 1 %>
 <%= hidden_field_tag 'vote_type', "question" %>
 <%= f.submit "upvote" %>
-<%end %>
+<%end %><%= @question.score %>
 <%= form_for [@question,@vote] do |f|%>
 <%= f.hidden_field :value %>
 <%= hidden_field_tag 'value', -1 %>
@@ -17,16 +20,43 @@ this is the show page
 <%= f.submit "downvote" %>
 <%end %>
 <% end %>
+</div>
+</div>
+</article>
 
+
+
+
+<div id="question-comments"
 <ul>
 <% @question.comments.each do |comment| %>
   <li>
     <%= comment.content %>
     <%= comment.user.username %>
+    <%= comment.score %>
+<% if current_user.hasnt_voted?("Comment", comment.id) %>
+<%= form_for [@question,comment,@vote] do |f|%>
+<%= f.hidden_field :value %>
+<%= hidden_field_tag 'value', 1 %>
+<%= hidden_field_tag 'vote_type', "comment" %>
+<%= f.submit "upvote" %>
+<%end %>
+
+<%= form_for [@question,comment,@vote] do |f|%>
+<%= f.hidden_field :value %>
+<%= hidden_field_tag 'value', -1 %>
+<%= hidden_field_tag 'vote_type', "comment" %>
+<%= f.submit "downvote" %>
+<%end %>
+<% end %>
+
   </li>
 <% end %>
 </ul>
 <%# if current_user.owns? %>
+</div>
+
+<div id="new-question-comment">
 
 <%= form_for [@question, @comment] do |f|%>
 <%= hidden_field_tag :comment_type, "Question" %>
@@ -35,10 +65,12 @@ this is the show page
 <%= f.submit 'submit' %>
 <% end %>
 
+</div>
 
 
 <%= render @answers %>
 
+<div id="new-question-answer">
 
 <%= form_for [@question, @answer] do |f| %>
 <%= f.label :content %>
@@ -46,4 +78,10 @@ this is the show page
 <%= f.submit "Submit!" %>
 <% end %>
 
+</div>
 <%= button_to "Delete This Question", {action:"destroy",id: @question.id}, method: :delete, data: {confirm: "Are you sure you want to delete this? It might be helpful for other people later."} %>
+
+</div>
+
+</div>
+

@@ -24,6 +24,22 @@
 <% answer.comments.each do |comment| %>
 <li><%= comment.content %></li>
 <li><%= comment.user.username %></li>
+<%= comment.score %>
+<% if current_user.hasnt_voted?("Comment", comment.id) %>
+<%= form_for [@question ,answer, comment,@vote] do |f|%>
+<%= f.hidden_field :value %>
+<%= hidden_field_tag 'value', 1 %>
+<%= hidden_field_tag 'vote_type', "comment" %>
+<%= f.submit "upvote" %>
+<%end %>
+
+<%= form_for [@question,comment,@vote] do |f|%>
+<%= f.hidden_field :value %>
+<%= hidden_field_tag 'value', -1 %>
+<%= hidden_field_tag 'vote_type', "comment" %>
+<%= f.submit "downvote" %>
+<%end %>
+<% end %>
 <% end %>
 </ul>
 
