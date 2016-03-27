@@ -15,13 +15,17 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @question = Question.find(params[:id])
-    @answer = Answer.new
-    @answers = @question.answers
-    @score = @question.score
-    @question_comments = @question.comments
-    @comment = Comment.new
-    @vote = Vote.new
+    if current_user
+      @question = Question.find(params[:id])
+      @answer = Answer.new
+      @answers = @question.answers
+      @score = @question.score
+      @question_comments = @question.comments
+      @comment = Comment.new
+      @vote = Vote.new
+    else
+      redirect_to '/users/new'
+    end
   end
 
   def create
