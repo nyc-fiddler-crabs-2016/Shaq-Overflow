@@ -1,3 +1,4 @@
+<div id = "new-user-form">
 <%= form_for @user do |f|%>
   <%= f.label :username %>
   <%= f.text_field :username %><br>
@@ -5,5 +6,6 @@
   <%= f.text_field :email %><br>
   <%= f.label :password %>
   <%= f.password_field :password %><br>
-  <%= f.submit %>
+  <div id = "new-user-button"><%= f.submit %></div>
 <% end %>
+</div>

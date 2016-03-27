@@ -4,6 +4,9 @@ class VotesController < ApplicationController
     case params[:vote_type]
       when "answer"
         @vote_target = Answer.find(params[:answer_id])
+        # if current_user.has_voted?(:vote_type, @vote_target)
+
+
       when "comment"
         @vote_target = Comment.find(params[:comment_id])
       when "question"
