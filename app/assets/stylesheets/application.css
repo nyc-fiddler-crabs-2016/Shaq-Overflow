@@ -13,7 +13,9 @@
  *= require_tree .
  *= require_self
  */
-
+nav {
+  padding-top:2em;
+}
 nav ul {
     list-style-type: none;
     margin: auto;
@@ -91,4 +93,16 @@ body{
   font-family: chalkboard;
   width:60em;
   margin: auto;
+}
+
+#question{
+  font-size: 2em;
+  padding-top: 1em;
+}
+#answer{
+  padding-bottom: 1em;
+  padding-left:1em ;
+  padding-right:1em ;
+  padding-top: .5em;
+  border-bottom: 1px solid #c0c0c0;
 }
