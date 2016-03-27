@@ -12,7 +12,7 @@ class SessionController < ApplicationController
       redirect_to root_path
     else
       flash.alert = 'Incorrect login info.'
-      redirect_to login_path
+      redirect_to :back
     end
   end
 
