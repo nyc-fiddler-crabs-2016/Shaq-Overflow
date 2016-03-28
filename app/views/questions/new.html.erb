@@ -1,9 +1,10 @@
-this is the show page for your question
-
+Ask a New Question!
 <%= form_for @question do |f|%>
 <%= f.label :title %>
 <%= f.text_field :title %>
+<br>
 <%= f.label :content %>
 <%= f.text_area :content %>
+<br>
 <%= f.submit 'submit' %>
 <% end %>

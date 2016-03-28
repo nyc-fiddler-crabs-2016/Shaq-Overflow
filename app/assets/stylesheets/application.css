@@ -119,3 +119,18 @@ body{
 .answer_comment_form {
   display: none;
 }
+
+.upvote input[type="submit"]{
+  background: url('http://www.virtualtechs.net/images/Shaqisms_icon.png');
+  background-size: 35px 35px;
+  height: 35px;
+  width: 35px;
+}
+
+.new_vote input[type="submit"]{
+  background: url('http://www.thebayslaps.com/images/smilies/icon_shaq.png');
+  background-size: 35px 35px;
+  height: 35px;
+  width: 35px;
+}
+

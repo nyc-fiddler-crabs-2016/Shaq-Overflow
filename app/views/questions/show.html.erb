@@ -6,17 +6,17 @@
 	<div id="score">
 		<div id="question-voting">
 			<% if current_user.hasnt_voted?("Question", @question.id) %>
-				<%= form_for [@question,@vote] do |f|%>
+				<%= form_for [@question,@vote], html: {class: 'upvote'} do |f|%>
 					<%= f.hidden_field :value %>
 					<%= hidden_field_tag 'value', 1 %>
 					<%= hidden_field_tag 'vote_type', "question" %>
-					<%= f.submit "upvote" %>
+					<%= f.submit "" %>
 				<%end %><%= @question.score %>
 				<%= form_for [@question,@vote] do |f|%>
 					<%= f.hidden_field :value %>
 					<%= hidden_field_tag 'value', -1 %>
 					<%= hidden_field_tag 'vote_type', "question" %>
-					<%= f.submit "downvote" %>
+					<%= f.submit "" %>
 				<%end %>
 			<% end %>
 		</div>
@@ -34,18 +34,18 @@
 	    <%= comment.user.username %>
 	    <%= comment.score %>
 			<% if current_user.hasnt_voted?("Comment", comment.id) %>
-				<%= form_for [@question,comment,@vote] do |f|%>
+				<%= form_for [@question,comment,@vote], html: {class: 'upvote'} do |f|%>
 					<%= f.hidden_field :value %>
 					<%= hidden_field_tag 'value', 1 %>
 					<%= hidden_field_tag 'vote_type', "comment" %>
-					<%= f.submit "upvote" %>
+					<%= f.submit "" %>
 				<%end %>
 
 				<%= form_for [@question,comment,@vote] do |f|%>
 					<%= f.hidden_field :value %>
 					<%= hidden_field_tag 'value', -1 %>
 					<%= hidden_field_tag 'vote_type', "comment" %>
-					<%= f.submit "downvote" %>
+					<%= f.submit "" %>
 				<%end %>
 			<% end %>
 		</li>
