@@ -106,3 +106,16 @@ body{
   padding-top: .5em;
   border-bottom: 1px solid #c0c0c0;
 }
+
+
+#new_comment {
+  display: none;
+}
+
+#new_answer {
+  display: none;
+}
+
+.answer_comment_form {
+  display: none;
+}
