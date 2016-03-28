@@ -63,6 +63,11 @@
 		<% end %>
 	</div>
 
+	<% if @answers.empty? %>
+		<p>This question has no answers. Be the first to answer!</p>
+	<% else %>
+		<h4>Answers:</h4>
+	<% end %>
 	<div id="new-question-answer">
 		<%= button_tag 'answer question!', id: 'question_answer_link'%>
 		<%= form_for [@question, @answer] do |f| %>
@@ -70,11 +75,6 @@
 			<%= f.submit "Submit!" %>
 		<% end %>
 	</div>
-	<% if @answers.empty? %>
-		<p>This question has no answers. Be the first to answer!</p>
-	<% else %>
-		<h4>Answers:</h4>
-	<% end %>
 
 	<%= render @answers %>
 
