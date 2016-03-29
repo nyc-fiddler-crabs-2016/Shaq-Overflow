@@ -1,0 +1,59 @@
+<div>
+	<div>
+		<%= answer.content %><br>
+		--<%= answer.user.username %>
+		<%= answer.score %>
+	</div>
+
+	<% if current_user.hasnt_voted?("Answer", answer.id) %>
+		<%= form_for [@question,answer,@vote], html: {class: 'upvote'} do |f|%>
+			<%= f.hidden_field :value %>
+			<%= hidden_field_tag 'value', 1 %>
+			<%= hidden_field_tag 'vote_type', "answer" %>
+			<%= f.submit "" %>
+		<%end %>
+		<%= form_for [@question,answer,@vote] do |f|%>
+			<%= f.hidden_field :value %>
+			<%= hidden_field_tag 'value', -1 %>
+			<%= hidden_field_tag 'vote_type', "answer" %>
+			<%= f.submit "" %>
+		<%end %>
+	<% end %>
+
+	<ul>
+		<% answer.comments.each do |comment| %>
+			<li>
+				<%= comment.content %><br>
+				<%= comment.user.username %>
+			</li>
+			<%= comment.score %>
+			<% if current_user.hasnt_voted?("Comment", comment.id) %>
+				<%= form_for [@question ,answer, comment,@vote], html: {class: 'upvote'} do |f|%>
+					<%= f.hidden_field :value %>
+					<%= hidden_field_tag 'value', 1 %>
+					<%= hidden_field_tag 'vote_type', "comment" %>
+					<%= f.submit "" %>
+				<%end %>
+			<%end %>
+			<%= form_for [@question,comment,@vote] do |f|%>
+				<%= f.hidden_field :value %>
+				<%= hidden_field_tag 'value', -1 %>
+				<%= hidden_field_tag 'vote_type', "comment" %>
+				<%= f.submit "" %>
+			<% end %>
+		<% end %>
+	</ul>
+
+	<div>
+		<%= button_tag 'comment', class: 'answer_comment_button'%>
+		<%= form_for [@question, answer, @comment], html: {class:'answer_comment_form', id: 'answer_comment_form'} do |f|%>
+			<%= hidden_field_tag :comment_type, 'Answer'  %>
+			<%= f.text_area :content %><br>
+			<%= f.submit 'submit' %>
+		<% end %>
+	</div>
+	<%= button_to "Delete This Answer", question_answer_path(@question.id, answer.id), method: :delete, confirm: "shaqfu" %>
+</div>
+<br>
+
+<hr>

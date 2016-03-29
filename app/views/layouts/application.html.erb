@@ -8,6 +8,26 @@
 </head>
 <body>
 
+  <header>
+    <nav>
+      <ul>
+        <li><%= link_to 'home', root_path%></li>
+        <li><%= link_to 'ask a question', new_question_path %></li>
+        <% if current_user %>
+        <li><%= link_to 'logout', session_path(current_user.id), method: :delete %></li>
+        <li><%= link_to "#{current_user.username}", current_user %></li>
+        <% else %>
+        <li><%= render 'session/new' %></li>
+        <li><%= link_to 'sign up', new_user_path %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </header>
+<% if flash %>
+  <% flash.each do |name, message| %>
+    <div><%= message %></div>
+  <% end %>
+<% end %>
 <%= yield %>
 
 </body>

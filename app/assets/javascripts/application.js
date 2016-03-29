@@ -13,3 +13,21 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+$( document ).ready(function() {
+	$("#question_comment_link").on('click', function(event){
+		event.preventDefault();
+		$(".new_comment").toggle();
+	})
+
+	$("#question_answer_link").on('click', function(event){
+		event.preventDefault();
+		$(".new_answer").toggle();
+	})
+
+	$(".answer_comment_button").on('click', function(event){
+		event.preventDefault();
+		$(this).parent().find(".answer_comment_form").toggle();
+	})
+
+});
